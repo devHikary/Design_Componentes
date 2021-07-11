@@ -1,3 +1,19 @@
+# **Curso de Angular: Design de componentes com acessibilidade**
+
+Instrutor: Flavio Henrique de Souza Almeida
+
+---
+## Anotações
+
+- Para acessar um `enum` através do template do componente é preciso atribui a `enum` a uma **propriedade pública** do componente para então acessarmos seus valores no template
+- Event Binding
+
+    `yesNoAnswer` recebe `$event` , o `$event` é o valor que passado no `EventEmitter`
+
+    ```tsx
+    [value]="yesNoAnswer"
+    (valueChanged) = "yesNoAnswer = $event"
+    ```
 - Two way data Binding
 
     Two way data binding só funciona pq as duas propriedades tem o mesmo nome (output  acrescido o sufixo **Change**)
@@ -54,9 +70,26 @@
     - Se estou no segundo botão e clico para voltar, aperto o botão esquerdo, left, ele vai pegar o primeiro botão,
     - Se estou no último elemento e peço para ir para a frente, não tem o elemento mais, tenho que voltar para o início.
     - Se estou no primeiro elemento e peço para ir para a trás, não tem o elemento mais, tenho que ir para o fim.
+- Em um **binding de atributo**, quando é retornado `null`, o atributo é ignorado e não é criado
+    - `[attr.disabled] = "disabled? disabled : null"`
+- Se você precisa de um botão que esteja desabilitado mas que ainda possa ganhar foco, utilize o atributo `aria-disabled`.
+
+---
 
 ## Ferramenta para teste de Acessibilidade
 
 - Plugin do Chrome : ChromeVox Classic Extension
 
-- [https://www.w3.org/TR/wai-aria-practices-1.1/](https://www.w3.org/TR/wai-aria-practices-1.1/)
+---
+
+## Guia de Acessibilidade
+
+[WAI-ARIA Authoring Practices 1.1](https://www.w3.org/TR/wai-aria-practices-1.1/)
+
+---
+
+## Reflexão sobre a utilização de tags padrões
+
+Utilizando as tags padrões do HTML já teríamos acessibilidade com poucos ajustes.
+
+Mas há casos em que enfrentamos alguns problemas que não vai permitir usar as tags padrões. E então, resolvemos isso utilizando os conceitos aprendidos nesse curso para manipular o nosso componente.
