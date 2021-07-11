@@ -42,7 +42,18 @@
     ```
 
 - Se for utilizar uma biblioteca utilitária em todos os componentes, é importante criar uma camada/ um  service para essa biblioteca. Assim, se caso um dia, mudarmos essa biblioteca será preciso alterar em apenas um lugar.
+- Quando usamos o `tabindex=”-1”` , o elemento passa a **não** ser acessível pelo `TAB`.
+- Utilizamos a `Directive` quando um código não pertence a nenhum componente específico, mas que pode estar presente em todos os componentes.
+- Vou dizer no `hostListener` que quero ouvir ao evento `keyup` e quando esse evento for disparado quero ter acesso a esse objeto que está aqui, ao evento disparado pelo `keyup` que vou ter acesso ao meu método.
 
+    `@HostListener('keyup', ['$event'])`
+
+- `@ContentChildren` :Usado para obter uma `QueryList` de elementos ou diretivas do conteúdo `DOM`. Sempre que um elemento filho é adicionado, removido ou movido, a lista de consulta será atualizada e as alterações observáveis na lista de consulta emitirão um novo valor.-
+- Lógicas da setas:
+    - Se estou no primeiro botão ele vai retornar o segundo botão.
+    - Se estou no segundo botão e clico para voltar, aperto o botão esquerdo, left, ele vai pegar o primeiro botão,
+    - Se estou no último elemento e peço para ir para a frente, não tem o elemento mais, tenho que voltar para o início.
+    - Se estou no primeiro elemento e peço para ir para a trás, não tem o elemento mais, tenho que ir para o fim.
 
 ## Ferramenta para teste de Acessibilidade
 

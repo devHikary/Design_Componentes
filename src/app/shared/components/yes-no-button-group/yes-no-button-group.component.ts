@@ -24,6 +24,7 @@ export class YesNoButtonGroupComponent implements OnInit, ControlValueAccessor {
   public options = YesNoButtonGroupOptions;
   public onChange = (value: string) => {};
   public onTouched = () => {};
+  public disabled = false;
 
   constructor(uniqueIdService: UniqueIdService) {
     this.id = uniqueIdService.generateUniqueIdWithPrefix('yes-no-button-group');
@@ -44,7 +45,7 @@ export class YesNoButtonGroupComponent implements OnInit, ControlValueAccessor {
     this.onTouched = fn;
   }
   public setDisabledState?(isDisabled: boolean): void {
-    throw new Error('Method not implemented.');
+    this.disabled = isDisabled;
   }
 
   public activate(value: string): void{
