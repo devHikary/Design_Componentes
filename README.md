@@ -1,27 +1,51 @@
-# A11yP1
+- Two way data Binding
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0.
+    Two way data binding só funciona pq as duas propriedades tem o mesmo nome (output  acrescido o sufixo **Change**)
 
-## Development server
+    ```tsx
+    [(value)]="yesNoAnswer"
+    ```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- O `FormBuilder` vai auxiliar a criar a propriedade form
+- `ngSubmit` se caso tiver algum erro de validação no `submit()` a página não será atualizada.
+- É preciso associar o campo do formulário com a propriedade
 
-## Code scaffolding
+    ```tsx
+    formControlName = "yesNoAnswer"
+    ```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Interface `ControlValueAccessor`: Quando criamos um componente para o formulário é preciso implementar o `control value access` para "ensinar" ao `formGroup` como o componente deve se comportar.
+    - Os componentes padrões do HTML já possuem essa interface implementada, por isso não precisamos nos preocupar
+- `NG_VALUE_ACCESSOR` é usada para configurar a sincronização com formControl.
+- É um injection token que marca nosso componente para que seja injetado dentro da infraestrutura do formGroup.
+- O `forwardRef` é usado quando o `injection token` que precisamos referenciar, que é o `NG_VALUE` é declarado, mas ainda não é definido.
+- No `activate`, chamar o `writeValue` que vai mudar o valor da propriedade do componente e ainda vai notificar o angular que ele tem que propagar uma mudança.
 
-## Build
+    ```tsx
+    public writeValue(value: string): void {
+        this.value = value;
+        this.onChange(this.value);
+        this.valueChange.emit(this.value);
+      }
+    ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+    ```tsx
+    public activate(value: string): void{
+        this.writeValue(value);
+      }
+    ```
+- `role`: permite aplicar semântica e elemento não semânticos do HTML, inclusive mudar a semântica padrão de elementos já existentes.
+- Biblioteca para criar um id único
 
-## Running unit tests
+    ```tsx
+    npm install uuid@8.3.0
+    ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Se for utilizar uma biblioteca utilitária em todos os componentes, é importante criar uma camada/ um  service para essa biblioteca. Assim, se caso um dia, mudarmos essa biblioteca será preciso alterar em apenas um lugar.
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Ferramenta para teste de Acessibilidade
 
-## Further help
+- Plugin do Chrome : ChromeVox Classic Extension
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- [https://www.w3.org/TR/wai-aria-practices-1.1/](https://www.w3.org/TR/wai-aria-practices-1.1/)
