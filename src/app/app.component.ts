@@ -16,7 +16,7 @@ export class AppComponent {
     this.form = formBuilder.group({
       yesNoAnswer: [{
         value: null,
-        disabled: true
+        disabled: false
       }]
     });
   }
